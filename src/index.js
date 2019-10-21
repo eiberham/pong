@@ -12,13 +12,11 @@ const config = {
     }
 };
 
-window.onload = () => {
-    var game = new Phaser.Game(config);
-};
+const game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.image("playground", "../assets/images/playground.png");
+    this.load.image("playground", "./assets/images/playground.png");
     /* this.load.spritesheet('dude', 
         'assets/dude.png',
         { frameWidth: 32, frameHeight: 48 }
@@ -27,6 +25,10 @@ function preload ()
 
 function create ()
 {
+    game.scale.pageAlignHorizontally = true;
+    game.scale.pageAlignVertically = true;
+    game.scale.refresh();
+    
     this.add.image(400, 300, "playground");
 
     platforms = this.physics.add.staticGroup();
@@ -40,4 +42,5 @@ function create ()
 
 function update ()
 {
+    
 }

@@ -36,8 +36,12 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin({
             verbose: true,
-            cleanStaleWebpackAssets: false,
-            protectWebpackAssets: false,
+            cleanOnceBeforeBuildPatterns: [],
+            cleanAfterEveryBuildPatterns: [
+                '**/*.js', 
+                '!assets/images', 
+                '!assets/images/**/*'
+            ],
         }),
         new HtmlWebpackPlugin({
             title: "Pong game",
