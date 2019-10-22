@@ -5,6 +5,13 @@ const config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+    },
     scene: {
         preload: preload,
         create: create,
@@ -13,34 +20,55 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
+let cursors, paddle, ball;
 
-function preload ()
-{
+function preload (){
     this.load.image("playground", "./assets/images/playground.png");
-    /* this.load.spritesheet('dude', 
-        'assets/dude.png',
-        { frameWidth: 32, frameHeight: 48 }
-    ); */
+    this.load.image("paddle", "./assets/images/paddle.png");
+    this.load.image("ball", "./assets/images/ball.png");
 }
 
-function create ()
-{
+function create (){
     game.scale.pageAlignHorizontally = true;
     game.scale.pageAlignVertically = true;
     game.scale.refresh();
     
     this.add.image(400, 300, "playground");
 
-    platforms = this.physics.add.staticGroup();
+    //platforms = this.physics.add.staticGroup();
+    
+    paddle = this.physics.add.sprite(10, (config.height / 2) - (150 / 2), 'paddle');
+    paddle.body.setAllowGravity(false);
+    paddle.setBounce(0.2);
+    paddle.setCollideWorldBounds(true);
+    paddle.displayHeight = 150;
+    paddle.displayWidth  = 40;
 
-    /* platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+    cursors = this.input.keyboard.createCursorKeys();
 
-    platforms.create(600, 400, 'ground');
-    platforms.create(50, 250, 'ground');
-    platforms.create(750, 220, 'ground'); */
+    ball = this.physics.add.sprite(0, 0, 'ball');
+    ball.displayWidth = 50;
+    ball.displayHeight = 50;
+    ball.setBounce(0.8);
+    ball.setCollideWorldBounds(true);
+
+    //this.physics.enable(paddle, Phaser.Physics.ARCADE);
+
+    /* pleft.width  = 50;
+    pleft.height = 100; */
+
+    //game.load.image(360, 150, 'paddle');
+    /* pright.width  = 50;
+    pright.height = 100; */
 }
 
-function update ()
-{
-    
+function update (){
+    if (cursors.up.isDown){
+        paddle.setVelocityY(-160);
+        //paddle.anims.play('left', true);
+    }
+    else if (cursors.down.isDown){
+        paddle.setVelocityY(160);
+        //player.anims.play('right', true);
+    }
 }
