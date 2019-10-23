@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: './src/index.js',
@@ -18,6 +19,15 @@ module.exports = {
             {
                 test: /\.(gif|png|jpe?g|svg|xml)$/i,
                 use: "file-loader"
+            },
+            {
+                test: /\.(s*)css$/,
+                use:  [  
+                    'style-loader', 
+                    MiniCssExtractPlugin.loader, 
+                    'css-loader', 
+                    'sass-loader'
+                ]
             }
         ]
     },
@@ -26,10 +36,10 @@ module.exports = {
     },
     devtool: 'source-map',
     resolve: {
-        extensions: ['.js']
+        extensions: ['.js', '.scss']
     },
     output: {
-        filename: 'pong.js',
+        filename: 'squash.js',
         path: path.resolve(__dirname, 'public')
     },
     mode: 'development',
@@ -39,14 +49,18 @@ module.exports = {
             cleanOnceBeforeBuildPatterns: [],
             cleanAfterEveryBuildPatterns: [
                 '**/*.js', 
+                '**/*.map',
                 '!assets/images', 
                 '!assets/images/**/*'
             ],
         }),
         new HtmlWebpackPlugin({
-            title: "Pong game",
             hash: true,
-            filename: "./index.html"
+            filename: "./index.html",
+            template: "./src/index.html"
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'styles.css',
         })
     ]
 }

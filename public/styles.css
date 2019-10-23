@@ -1,0 +1,9 @@
+html body {
+  background-color: #f1eded; }
+  html body div#root {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+
+
+/*# sourceMappingURL=styles.css.map*/

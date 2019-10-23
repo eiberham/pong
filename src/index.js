@@ -1,7 +1,9 @@
 import "phaser";
+import "./styles.scss";
 
 const config = {
-    title: "Pong game",
+    title: "Squash game",
+    parent: "root",
     type: Phaser.AUTO,
     width: 800,
     height: 600,
@@ -21,6 +23,7 @@ const config = {
 
 const game = new Phaser.Game(config);
 let cursors, paddle, ball;
+let velX = 800, velY = 800;
 
 function preload (){
     this.load.image("playground", "./assets/images/playground.png");
@@ -34,10 +37,8 @@ function create (){
     game.scale.refresh();
     
     this.add.image(400, 300, "playground");
-
-    //platforms = this.physics.add.staticGroup();
     
-    paddle = this.physics.add.sprite(10, (config.height / 2) - (150 / 2), 'paddle');
+    paddle = this.physics.add.sprite(25, (config.height / 2) - (150 / 2), 'paddle');
     paddle.body.setAllowGravity(false);
     paddle.setBounce(0.2);
     paddle.setCollideWorldBounds(true);
@@ -49,26 +50,35 @@ function create (){
     ball = this.physics.add.sprite(0, 0, 'ball');
     ball.displayWidth = 50;
     ball.displayHeight = 50;
-    ball.setBounce(0.8);
+    ball.setBounce(1);
     ball.setCollideWorldBounds(true);
+    ball.body.damping = 0;
+    ball.setVelocity(velX, velY);
 
-    //this.physics.enable(paddle, Phaser.Physics.ARCADE);
-
-    /* pleft.width  = 50;
-    pleft.height = 100; */
-
-    //game.load.image(360, 150, 'paddle');
-    /* pright.width  = 50;
-    pright.height = 100; */
+    this.physics.add.collider(ball, paddle, hitPaddle, null, this);
 }
 
 function update (){
+
     if (cursors.up.isDown){
-        paddle.setVelocityY(-160);
-        //paddle.anims.play('left', true);
+        paddle.setVelocityY(-860);
     }
     else if (cursors.down.isDown){
-        paddle.setVelocityY(160);
-        //player.anims.play('right', true);
+        paddle.setVelocityY(860);
     }
+}
+
+function hitPaddle(ball, paddle)
+{
+  velX = velX + 50;
+  velX = velX * -1;
+  
+  ball.setVelocityX(velX);
+
+  if( velY < 0 )
+  {
+    velY = velY*-1
+    ball.setVelocityY(velY);
+  }
+  paddle.setVelocityX(-1);
 }
