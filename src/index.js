@@ -22,7 +22,7 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
-let cursors, paddle, ball;
+let cursors, paddle, ball, scoreText, scoreCount;
 let velX = 800, velY = 800;
 
 function preload (){
@@ -37,6 +37,8 @@ function create (){
     game.scale.refresh();
     
     this.add.image(400, 300, "playground");
+    scoreCount = 0;
+    scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#FFF' });
     
     paddle = this.physics.add.sprite(25, (config.height / 2) - (150 / 2), 'paddle');
     paddle.body.setAllowGravity(false);
@@ -66,19 +68,29 @@ function update (){
     else if (cursors.down.isDown){
         paddle.setVelocityY(860);
     }
+
+    if(ball.x <= 30){
+        if(scoreCount >= 0){
+            scoreCount -= 1;
+            scoreText.setText('Score: ' + scoreCount);
+        }
+        //reset();
+    }
 }
 
-function hitPaddle(ball, paddle)
-{
-  velX = velX + 50;
-  velX = velX * -1;
-  
-  ball.setVelocityX(velX);
+function hitPaddle(ball, paddle){
+    scoreCount += 1;
+    scoreText.setText('Score: ' + scoreCount);
 
-  if( velY < 0 )
-  {
-    velY = velY*-1
-    ball.setVelocityY(velY);
-  }
-  paddle.setVelocityX(-1);
+    velX = velX + 50;
+    velX = velX * -1;
+    
+    ball.setVelocityX(velX);
+
+    if( velY < 0 ){
+        velY = velY*-1
+        ball.setVelocityY(velY);
+    }
+
+    paddle.setVelocityX(-1);
 }
