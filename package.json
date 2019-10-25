@@ -4,9 +4,10 @@
   "description": "Squash game with phaser",
   "main": "index.js",
   "scripts": {
-    "serve": "http-server -s -o",
-    "build": "webpack --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:serve": "http-server -s -o",
+    "dev:build": "webpack --watch",
+    "eslint": "eslint --ext=js --ignore-pattern '/public/*'"
   },
   "keywords": [
     "squash",
@@ -25,10 +26,12 @@
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.0",
+    "eslint": "^6.5.1",
     "file-loader": "^4.2.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.12.0",
+    "npm-run-all": "^4.1.5",
     "raw-loader": "^3.1.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
