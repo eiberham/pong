@@ -1,16 +1,16 @@
-import 'phaser';
-import './styles.scss';
+import "phaser";
+import "./styles.scss";
 
 const config = {
-    title: 'Squash game',
-    parent: 'root',
+    title: "Squash game",
+    parent: "root",
     type: Phaser.AUTO,
-    width: process.env.PLAYGROUND_WIDTH,
-    height: process.env.PLAYGROUND_HEIGHT,
+    width: 800,
+    height: 600,
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: process.env.GRAVITY_Y },
+            gravity: { y: 300 },
             debug: false
         }
     },
@@ -23,12 +23,12 @@ const config = {
 
 const game = new Phaser.Game(config);
 let cursors, paddle, ball, scoreText, scoreCount;
-let velX = process.env.BALL_VELOCITY, velY = process.env.BALL_VELOCIY;
+let velX = 800, velY = 800;
 
 function preload (){
-    this.load.image('playground', './assets/images/playground.png');
-    this.load.image('paddle', './assets/images/paddle.png');
-    this.load.image('ball', './assets/images/ball.png');
+    this.load.image("playground", "./assets/images/playground.png");
+    this.load.image("paddle", "./assets/images/paddle.png");
+    this.load.image("ball", "./assets/images/ball.png");
 }
 
 function create (){
@@ -36,7 +36,7 @@ function create (){
     game.scale.pageAlignVertically = true;
     game.scale.refresh();
     
-    this.add.image(400, 300, 'playground');
+    this.add.image(400, 300, "playground");
     scoreCount = 0;
     scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#FFF' });
     
@@ -74,6 +74,7 @@ function update (){
             scoreCount -= 1;
             scoreText.setText('Score: ' + scoreCount);
         }
+
         //reset();
     }
 }
