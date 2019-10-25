@@ -9,6 +9,12 @@ As described somewhere on the internet:
 
 For the purpose of this game, there's only a single player and one have to hit the ball as much as possible in order to score points.
 
+The game looks like this:
+
+<p align="center">
+    <img src="squash.gif" alt="recording" />
+</p>
+
 <table border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: none;">
   <tr>
     <td><img alt="GitHub" src="https://img.shields.io/github/license/wwleak/pong?style=for-the-badge"></td>
