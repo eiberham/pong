@@ -9,6 +9,16 @@ As described somewhere on the internet:
 
 For the purpose of this game, there's only a single player and one have to hit the ball as much as possible in order to score points.
 
+<table border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: none;">
+  <tr>
+    <td><img alt="GitHub" src="https://img.shields.io/github/license/wwleak/pong?style=for-the-badge"></td>
+    <td><img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/wwleak/pong?style=for-the-badge"></td>
+    <td><img alt="GitHub top language" src="https://img.shields.io/github/languages/top/wwleak/pong?style=for-the-badge"></td>
+    <td><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/wwleak/pong?style=for-the-badge"></td>
+    <td><img alt="GitHub stars" src="https://img.shields.io/github/stars/wwleak/pong?style=for-the-badge"></td>
+  </tr>
+</table>
+
 ## Installation
 
 First off clone the repo:
