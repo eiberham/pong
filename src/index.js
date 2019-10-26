@@ -1,97 +1,37 @@
-import "phaser";
-import "./styles.scss";
+if (global === undefined) {
+	var global = window;
+}
 
-const config = {
-    title: "Squash game",
-    parent: "root",
-    type: Phaser.AUTO,
-    width: 800,
-    height: 600,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 300 },
-            debug: false
-        }
-    },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
-};
+import 'phaser';
+import './styles.scss';
+import config from './config';
+import BootScene from './scene/BootScene';
+import PreloaderScene from './scene/PreloaderScene';
+import GameScene from './scene/GameScene';
+ 
+// eslint-disable-next-line no-undef
+class Game extends Phaser.Game {
+	constructor (config) {
+		super(config);
+		this.globals = {
+			cursors:    null,
+			paddle:     null,
+			ball:       null,
+			score:      null,
+			points:     0,
+			velx: 0,
+			vely: 0
+		};
+		this.scene.add('Boot', BootScene);
+		this.scene.add('Preloader', PreloaderScene);
+		this.scene.add('Game', GameScene);
+		this.scene.start('Game');
+	}
+}
+ 
+window.game = new Game(config);
 
-const game = new Phaser.Game(config);
+
+/* const game = new Phaser.Game(config);
 let cursors, paddle, ball, scoreText, scoreCount;
-let velX = 800, velY = 800;
-
-function preload (){
-    this.load.image("playground", "./assets/images/playground.png");
-    this.load.image("paddle", "./assets/images/paddle.png");
-    this.load.image("ball", "./assets/images/ball.png");
-}
-
-function create (){
-    game.scale.pageAlignHorizontally = true;
-    game.scale.pageAlignVertically = true;
-    game.scale.refresh();
-    
-    this.add.image(400, 300, "playground");
-    scoreCount = 0;
-    scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#FFF' });
-    
-    paddle = this.physics.add.sprite(25, (config.height / 2) - (150 / 2), 'paddle');
-    paddle.body.setAllowGravity(false);
-    paddle.setBounce(0.2);
-    paddle.setCollideWorldBounds(true);
-    paddle.displayHeight = 150;
-    paddle.displayWidth  = 40;
-
-    cursors = this.input.keyboard.createCursorKeys();
-
-    ball = this.physics.add.sprite(0, 0, 'ball');
-    ball.displayWidth = 50;
-    ball.displayHeight = 50;
-    ball.setBounce(1);
-    ball.setCollideWorldBounds(true);
-    ball.body.damping = 0;
-    ball.setVelocity(velX, velY);
-
-    this.physics.add.collider(ball, paddle, hitPaddle, null, this);
-}
-
-function update (){
-
-    if (cursors.up.isDown){
-        paddle.setVelocityY(-860);
-    }
-    else if (cursors.down.isDown){
-        paddle.setVelocityY(860);
-    }
-
-    if(ball.x <= 30){
-        if(scoreCount >= 0){
-            scoreCount -= 1;
-            scoreText.setText('Score: ' + scoreCount);
-        }
-
-        //reset();
-    }
-}
-
-function hitPaddle(ball, paddle){
-    scoreCount += 1;
-    scoreText.setText('Score: ' + scoreCount);
-
-    velX = velX + 50;
-    velX = velX * -1;
-    
-    ball.setVelocityX(velX);
-
-    if( velY < 0 ){
-        velY = velY*-1
-        ball.setVelocityY(velY);
-    }
-
-    paddle.setVelocityX(-1);
-}
+let velX = 800, velY = 800; */
