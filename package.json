@@ -18,7 +18,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "dotenv-webpack": "^1.7.0",
-    "http-server": "^0.11.1",
+    "http-server": "^0.11.2",
     "phaser": "^3.20.1"
   },
   "devDependencies": {
